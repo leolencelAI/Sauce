@@ -5,15 +5,6 @@ exports.likeSauce = (req, res, next) => {
   //contenu de la requête like dislike envoyé par le navigateur
   const sauceLikeObject = req.body;
 
-  // Check if the user has already liked/disliked the sauce
-  Sauce.findOne({_id: req.params.id})
-    .then((sauce) => {
-      if (sauce.usersLiked.includes(req.body.userId) && req.body.like === 1) {
-        return res.status(400).json({ error: "You have already liked this sauce." });
-      } else if (sauce.usersDisliked.includes(req.body.userId) && req.body.like === -1) {
-        return res.status(400).json({ error: "You have already disliked this sauce." });
-      }
-
       //sélection de la sauce (permet l'affichage des likes dislikes sur le front)
       Sauce.findOne({_id: req.params.id})
       .then((sauce) => {      
